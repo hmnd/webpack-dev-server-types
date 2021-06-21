@@ -5,6 +5,7 @@ declare namespace WebpackDevServer {
 <%- devServerTypes.replace(/\\n/g,'\n') %>
 }
 
+import { Configuration } from 'webpack';
 declare module 'webpack' {
   /**
   * Can be used to configure the behaviour of webpack-dev-server when
