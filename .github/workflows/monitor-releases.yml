@@ -1,5 +1,5 @@
 # Based on https://stackoverflow.com/a/58468828
-name: Get latest release version
+name: update-release-version
 on:
   schedule:
     - cron:  '0 * * * *'

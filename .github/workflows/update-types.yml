@@ -1,4 +1,4 @@
-name: Update types and release
+name: update-types
 on:
   push:
     paths:
