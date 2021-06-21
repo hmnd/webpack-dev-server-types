@@ -38,7 +38,7 @@ jobs:
       - name: Update package version
         working-directory: ./types
         run: |
-          npm version "${{ env.current_tag }}"
+          npm version "${{ env.current_tag }}" --allow-same-version
           npm install
       - name: Commit changes
         working-directory: ./types
