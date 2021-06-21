@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       commit-changes: ${{ steps.git-check.outputs.modified }}
+      current-tag: ${{ env.current_tag }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -65,12 +66,12 @@ jobs:
           git commit -am "chore: update types"
       - name: Update package version
         run: |
-          npm version "${{ env.current_tag }}" --allow-same-version
+          npm version "${{ needs.generate-types.outputs.current_tag }}" --allow-same-version
           npm install
       - name: Commit changes
         run: |
-          git commit -am "${{ env.current_tag }}"
-          git tag -a "${{ env.current_tag }}" -m "${{ env.current_tag }}"
+          git commit -am "${{ needs.generate-types.outputs.current_tag }}"
+          git tag -a "${{ needs.generate-types.outputs.current_tag }}" -m "${{ needs.generate-types.outputs.current_tag }}"
           git push --follow-tags
       - name: Publish to NPM
         env:
