@@ -2,7 +2,8 @@
   "name": "webpack-dev-server-types",
   "version": "4.0.0-beta.3",
   "description": "Up-to-date types for webpack-dev-server, generated from JSON schema",
-  "typings": "./index.d.ts",
+  "main": "",
+  "types": "./index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
