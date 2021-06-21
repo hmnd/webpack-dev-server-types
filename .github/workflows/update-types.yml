@@ -26,7 +26,7 @@ jobs:
           npm i -g hygen
       - name: Generate types
         run: |
-          npx quicktype options.json -s schema --top-level Configuration -o index.gen.d.ts --just-types
+          npx quicktype upstream/lib/options.json -s schema --top-level Configuration -o index.gen.d.ts --just-types
       - name: Remove old types
         run: rm -f types/index.d.ts
       - name: Namespace types
