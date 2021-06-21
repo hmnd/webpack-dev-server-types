@@ -22,6 +22,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+          registry-url: 'https://registry.npmjs.org'
       - run: |
           npm i -g quicktype
           npm i -g hygen
@@ -34,11 +35,22 @@ jobs:
         working-directory: ./types
         run: |
           npx hygen typesgen new --devServerTypes="$(<../index.gen.d.ts)"
+      - name: Update package version
+        working-directory: ./types
+        run: |
+          npm version "${{ env.current_tag }}"
+          npm install
       - name: Commit changes
         working-directory: ./types
         run: |
           git config --global user.name 'David Roizenman'
           git config --global user.email 'david@hmnd.io@users.noreply.github.com'
           git commit -am "${{ env.current_tag }}"
-          git tag -a "${{ env.current_tag }}"
+          git tag -a "${{ env.current_tag }}" -m "${{ env.current_tag }}"
           git push --follow-tags
+      - name: Publish to NPM
+        working-directory: ./types
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm publish
