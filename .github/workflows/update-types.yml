@@ -6,11 +6,18 @@ on:
   workflow_dispatch:
 jobs:
   generate-types:
+    name: Generate types from latest tagged version
     runs-on: ubuntu-latest
+    outputs:
+      commit-changes: ${{ steps.git-check.outputs.modified }}
     steps:
       - uses: actions/checkout@v2
         with:
           path: types
+      - name: Set up git identity
+        run: |
+          git config --global user.name 'David Roizenman'
+          git config --global user.email 'david@hmnd.io@users.noreply.github.com'
       - run: |
           echo "current_tag=$(cat types/release-versions/latest.txt | head -n 1)" >> $GITHUB_ENV
       - name: Checkout webpack-dev-server repo
@@ -35,21 +42,28 @@ jobs:
         working-directory: ./types
         run: |
           npx hygen typesgen new --devServerTypes="$(<../index.gen.d.ts)"
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+  update-repo-types:
+    name: Commit updated types
+    needs: [generate-types]
+    if: needs.generate-types.outputs.commit-changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        run: |
+          git commit -am "chore: update types"
       - name: Update package version
-        working-directory: ./types
         run: |
           npm version "${{ env.current_tag }}" --allow-same-version
           npm install
       - name: Commit changes
-        working-directory: ./types
         run: |
-          git config --global user.name 'David Roizenman'
-          git config --global user.email 'david@hmnd.io@users.noreply.github.com'
           git commit -am "${{ env.current_tag }}"
           git tag -a "${{ env.current_tag }}" -m "${{ env.current_tag }}"
           git push --follow-tags
       - name: Publish to NPM
-        working-directory: ./types
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
