@@ -46,16 +46,14 @@ jobs:
         if: steps.git-check.outputs.modified
         with:
           name: updated-types
-          path: ./types
+          path: ./types/index.d.ts
   update-repo-types:
     name: Commit updated types
     needs: [generate-types]
     if: needs.generate-types.outputs.commit-changes
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2 # needed to setup git creds
-        with:
-          path: repo-old
+      - uses: actions/checkout@v2
       - name: Set up git identity
         run: |
           git config --global user.name 'David Roizenman'
@@ -63,7 +61,6 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: updated-types
-          path: repo
       - name: Commit updated types
         working-directory: ./repo
         run: |
