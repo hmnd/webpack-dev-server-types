@@ -41,3 +41,4 @@ jobs:
           git config --global user.email 'david@hmnd.io@users.noreply.github.com'
           git commit -am "${{ env.current_tag }}"
           git tag -a "${{ env.current_tag }}"
+          git push --follow-tags
