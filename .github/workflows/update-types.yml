@@ -1,0 +1,39 @@
+name: Update types and release
+on:
+  push:
+    paths:
+      - release-versions/*
+jobs:
+  generate-types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: types
+      - run: |
+          echo "current_tag=$(cat types/release-versions/latest.txt | head -n 1)" >> $GITHUB_ENV
+      - name: Checkout webpack-dev-server repo
+        uses: actions/checkout@v2
+        with:
+          repository: webpack/webpack-dev-server
+          path: upstream
+          ref: ${{ env.current_tag }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: |
+          npm i -g quicktype
+          npm i -g hygen
+      - name: Generate types
+        run: |
+          npx quicktype options.json -s schema --top-level Configuration -o index.gen.d.ts --just-types
+      - name: Remove old types
+        run: rm -f types/index.d.ts
+      - name: Namespace types
+        run: |
+          cd types
+          npx hygen typesgen new --devServerTypes="$(<../index.gen.d.ts)"
+      - name: Commit changes
+        run: |
+          git commit -am "${{ env.current_tag }}"
+          git tag -a "${{ env.current_tag }}"
