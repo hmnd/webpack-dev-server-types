@@ -1,0 +1,22 @@
+{
+  "name": "webpack-dev-server-types",
+  "version": "4.0.0-beta.2",
+  "description": "Up-to-date types for webpack-dev-server, generated from JSON schema",
+  "typings": "./index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hmnd/webpack-dev-server-types.git"
+  },
+  "author": "David Roizenman <david@hmnd.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hmnd/webpack-dev-server-types/issues"
+  },
+  "homepage": "https://github.com/hmnd/webpack-dev-server-types#readme",
+  "peerDependencies": {
+    "webpack": "^4.0.0 || ^5.0.0"
+  }
+}
