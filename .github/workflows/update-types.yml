@@ -41,6 +41,11 @@ jobs:
       - name: Check for modified files
         id: git-check
         run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+      - uses: actions/upload-artifact@v2
+        if: steps.git-check.outputs.modified
+        with:
+          name: updated-types
+          path: ./types
   update-repo-types:
     name: Commit updated types
     needs: [generate-types]
@@ -52,6 +57,10 @@ jobs:
           git config --global user.name 'David Roizenman'
           git config --global user.email 'david@hmnd.io@users.noreply.github.com'
       - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: updated-types
+          path: .
       - name: Commit updated types
         run: |
           git commit -am "chore: update types"
