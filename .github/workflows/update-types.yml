@@ -14,10 +14,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           path: types
-      - name: Set up git identity
-        run: |
-          git config --global user.name 'David Roizenman'
-          git config --global user.email 'david@hmnd.io@users.noreply.github.com'
       - run: |
           echo "current_tag=$(cat types/release-versions/latest.txt | head -n 1)" >> $GITHUB_ENV
       - name: Checkout webpack-dev-server repo
@@ -51,6 +47,10 @@ jobs:
     if: needs.generate-types.outputs.commit-changes
     runs-on: ubuntu-latest
     steps:
+      - name: Set up git identity
+        run: |
+          git config --global user.name 'David Roizenman'
+          git config --global user.email 'david@hmnd.io@users.noreply.github.com'
       - uses: actions/checkout@v2
       - name: Commit updated types
         run: |
