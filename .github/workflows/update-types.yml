@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - release-versions/*
+  workflow_dispatch:
 jobs:
   generate-types:
     runs-on: ubuntu-latest
