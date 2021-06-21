@@ -62,18 +62,14 @@ jobs:
         with:
           name: updated-types
       - name: Commit updated types
-        working-directory: ./repo
         run: |
           git commit -am "chore: update types"
       - name: Update package version
-        working-directory: ./repo
         run: |
           npm version "${{ needs.generate-types.outputs.current-tag }}" --allow-same-version
       - name: Push to git
-        working-directory: ./repo
         run: git push --follow-tags
       - name: Publish to NPM
-        working-directory: ./repo
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
