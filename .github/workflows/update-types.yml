@@ -52,6 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Commit updated types
         run: |
           git commit -am "chore: update types"
       - name: Update package version
