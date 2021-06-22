@@ -10,6 +10,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      - uses: ./.github/actions/configure-git
       - name: Fetch release version
         run: |
           curl -sL https://api.github.com/repos/webpack/webpack-dev-server/releases/latest | \
@@ -20,7 +21,5 @@ jobs:
       - name: Commit latest release version
         if: steps.git-check.outputs.modified == 'true'
         run: |
-          git config --global user.name 'David Roizenman'
-          git config --global user.email 'david@hmnd.io@users.noreply.github.com'
           git commit -am "chore: update stored webpack-dev-server release version"
           git push

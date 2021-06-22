@@ -1,0 +1,9 @@
+name: Configure git identity
+description: Configures global git identity
+runs:
+  using: composite
+  steps:
+    - run: |
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+      shell: bash

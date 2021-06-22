@@ -54,10 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up git identity
-        run: |
-          git config --global user.name 'David Roizenman'
-          git config --global user.email 'david@hmnd.io@users.noreply.github.com'
+      - uses: ./.github/actions/configure-git
       - uses: actions/download-artifact@v2
         with:
           name: updated-types
