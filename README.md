@@ -3,10 +3,19 @@
 > Up-to-date types for webpack-dev-server, generated from JSON schema.
 
 <p align="center">
-<a href="https://github.com/hmnd/webpack-dev-server-types/actions/workflows/monitor-releases.yml"><img src="https://img.shields.io/github/workflow/status/hmnd/wepack-dev-server-types/update-release-versions?style=for-the-badge"></a>
-<a href="https://github.com/hmnd/webpack-dev-server-types/actions/workflows/update-types.yml"><img src="https://img.shields.io/github/workflow/status/hmnd/wepack-dev-server-types/update-types?style=for-the-badge"></a>
-<a href="https://npmjs.com/package/webpack-dev-server-types"><img src="https://img.shields.io/npm/v/webpack-dev-server-types?style=for-the-badge"></a>
-</center>
+  <a href="https://github.com/hmnd/webpack-dev-server-types/actions/workflows/monitor-releases.yml">
+    <img src="https://img.shields.io/github/workflow/status/hmnd/webpack-dev-server-types/update-release-version?style=flat-square">
+  </a>
+  <a href="https://github.com/hmnd/webpack-dev-server-types/actions/workflows/update-types.yml">
+    <img src="https://img.shields.io/github/workflow/status/hmnd/webpack-dev-server-types/update-types?style=flat-square">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://npmjs.com/package/webpack-dev-server-types">
+    <img src="https://img.shields.io/npm/v/webpack-dev-server-types?style=for-the-badge">
+  </a>
+</p>
 
 ## The Problem
 
