@@ -66,8 +66,10 @@ jobs:
         run: |
           npm version "${{ needs.generate-types.outputs.current-tag }}" --allow-same-version
       - name: Push to git
+        if: always()
         run: git push --follow-tags
       - name: Publish to NPM
+        if: always()
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
