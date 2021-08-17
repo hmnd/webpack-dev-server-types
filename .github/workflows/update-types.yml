@@ -62,6 +62,7 @@ jobs:
         run: |
           git commit -am "chore: update types"
       - name: Update package version
+        if: always()
         run: |
           npm version "${{ needs.generate-types.outputs.current-tag }}" --allow-same-version
       - name: Push to git
