@@ -13,6 +13,7 @@ export interface Configuration {
     https?:                   boolean | HTTPSClass;
     ipc?:                     boolean | string;
     liveReload?:              boolean;
+    magicHtml?:               boolean;
     onAfterSetupMiddleware?:  any;
     onBeforeSetupMiddleware?: any;
     onListening?:             any;
