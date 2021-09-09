@@ -10,7 +10,7 @@ export interface Configuration {
     host?:                    string;
     hot?:                     boolean | HotEnum;
     http2?:                   boolean;
-    https?:                   boolean | HTTPSClass;
+    https?:                   boolean | HTTPSObject;
     ipc?:                     boolean | string;
     liveReload?:              boolean;
     magicHtml?:               boolean;
@@ -85,17 +85,26 @@ export enum HotEnum {
     Only = "only",
 }
 
-export interface HTTPSClass {
+export interface HTTPSObject {
     /**
-     * Path to an SSL CA certificate.
+     * Path to an SSL CA certificate or content of an SSL CA certificate.
+     */
+    ca?: any;
+    /**
+     * Path to an SSL CA certificate or content of an SSL CA certificate.
      */
     cacert?: any;
     /**
-     * Path to an SSL certificate.
+     * Path to an SSL certificate or content of an SSL certificate.
      */
     cert?: any;
     /**
-     * Path to an SSL key.
+     * Path to PEM formatted CRLs (Certificate Revocation Lists) or content of PEM formatted
+     * CRLs (Certificate Revocation Lists).
+     */
+    crl?: any;
+    /**
+     * Path to an SSL key or content of an SSL key.
      */
     key?: any;
     /**
@@ -103,7 +112,7 @@ export interface HTTPSClass {
      */
     passphrase?: string;
     /**
-     * Path to an SSL pfx file.
+     * Path to an SSL pfx file or content of an SSL pfx file.
      */
     pfx?: any;
     /**
