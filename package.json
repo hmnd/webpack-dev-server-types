@@ -1,6 +1,6 @@
 {
   "name": "webpack-dev-server-types",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Up-to-date types for webpack-dev-server, generated from JSON schema",
   "main": "",
   "types": "./index.d.ts",
